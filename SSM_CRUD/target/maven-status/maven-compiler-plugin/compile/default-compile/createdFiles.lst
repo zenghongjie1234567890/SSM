@@ -1,0 +1,10 @@
+com\zhj\utils\GeneratorSqlmap.class
+com\zhj\bean\ExamstudentExample$Criteria.class
+com\zhj\bean\ExamstudentExample$Criterion.class
+com\zhj\Dao\ExamstudentMapper.class
+com\zhj\bean\Examstudent.class
+com\zhj\bean\ExamstudentExample.class
+com\zhj\Controller\ExanstudentController.class
+com\zhj\Service\Impl\ExamstudentServiceImpl.class
+com\zhj\bean\ExamstudentExample$GeneratedCriteria.class
+com\zhj\Service\ExamstudentService.class

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表页</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th colspan="6">列表</th>
+    </tr>
+    <tr>
+        <th>flowid</th>
+        <th>type</th>
+        <th>examcard</th>
+        <th>studentname</th>
+        <th>location</th>
+        <th>grade</th>
+    </tr>
+    <tr th:each="stu : ${list}">
+        <td th:text="${stu.flowid}"></td>
+        <td th:text="${stu.type}"></td>
+        <td th:text="${stu.examcard}"></td>
+        <td th:text="${stu.studentname}"></td>
+        <td th:text="${stu.location}"></td>
+        <td th:text="${stu.grade}"></td>
+    </tr>
+</table>
+</body>
+</html>

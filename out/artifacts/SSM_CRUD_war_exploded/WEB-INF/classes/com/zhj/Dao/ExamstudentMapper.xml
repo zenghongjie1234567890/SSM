@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhj.Dao.ExamstudentMapper">
+  <!--这个用来解决实体类属性名和数据库字段名不一样-->
+  <resultMap id="BaseResultMap" type="com.zhj.bean.Examstudent">
+    <id column="FlowID" jdbcType="INTEGER" property="flowid" />
+    <result column="Type" jdbcType="INTEGER" property="type" />
+    <result column="IDCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="ExamCard" jdbcType="VARCHAR" property="examcard" />
+    <result column="StudentName" jdbcType="VARCHAR" property="studentname" />
+    <result column="Location" jdbcType="VARCHAR" property="location" />
+    <result column="Grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FlowID, Type, IDCard, ExamCard, StudentName, Location, Grade
+  </sql>
+  <select id="selectAll" resultType="com.zhj.bean.Examstudent">
+    select * from examstudent
+  </select>
+  <select id="selectByExample" parameterType="com.zhj.bean.ExamstudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examstudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from examstudent
+    where FlowID = #{flowid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examstudent
+    where FlowID = #{flowid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhj.bean.ExamstudentExample">
+    delete from examstudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhj.bean.Examstudent">
+    insert into examstudent (FlowID, Type, IDCard,
+      ExamCard, StudentName, Location,
+      Grade)
+    values (#{flowid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR},
+      #{examcard,jdbcType=VARCHAR}, #{studentname,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR},
+      #{grade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhj.bean.Examstudent">
+    insert into examstudent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flowid != null">
+        FlowID,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="idcard != null">
+        IDCard,
+      </if>
+      <if test="examcard != null">
+        ExamCard,
+      </if>
+      <if test="studentname != null">
+        StudentName,
+      </if>
+      <if test="location != null">
+        Location,
+      </if>
+      <if test="grade != null">
+        Grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flowid != null">
+        #{flowid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="examcard != null">
+        #{examcard,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhj.bean.ExamstudentExample" resultType="java.lang.Long">
+    select count(*) from examstudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update examstudent
+    <set>
+      <if test="record.flowid != null">
+        FlowID = #{record.flowid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        Type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcard != null">
+        IDCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examcard != null">
+        ExamCard = #{record.examcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentname != null">
+        StudentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.location != null">
+        Location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null">
+        Grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update examstudent
+    set FlowID = #{record.flowid,jdbcType=INTEGER},
+      Type = #{record.type,jdbcType=INTEGER},
+      IDCard = #{record.idcard,jdbcType=VARCHAR},
+      ExamCard = #{record.examcard,jdbcType=VARCHAR},
+      StudentName = #{record.studentname,jdbcType=VARCHAR},
+      Location = #{record.location,jdbcType=VARCHAR},
+      Grade = #{record.grade,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhj.bean.Examstudent">
+    update examstudent
+    <set>
+      <if test="type != null">
+        Type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        IDCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="examcard != null">
+        ExamCard = #{examcard,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        StudentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        Location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        Grade = #{grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where FlowID = #{flowid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhj.bean.Examstudent">
+    update examstudent
+    set Type = #{type,jdbcType=INTEGER},
+      IDCard = #{idcard,jdbcType=VARCHAR},
+      ExamCard = #{examcard,jdbcType=VARCHAR},
+      StudentName = #{studentname,jdbcType=VARCHAR},
+      Location = #{location,jdbcType=VARCHAR},
+      Grade = #{grade,jdbcType=INTEGER}
+    where FlowID = #{flowid,jdbcType=INTEGER}
+  </update>
+</mapper>
