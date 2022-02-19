@@ -3,33 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>列表页</title>
-    <!--  引入bootstrap  -->
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/js/axios.min.js"></script>
+    <!--  引入bootstrap 因为使用的是thyleamf模板引擎，所有要用th:href 而不是简单的href -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
 </head>
 <body>
+<!--搭建显示页面-->
+<div class="container">
+    <!--标题-->
+    <div class="row">
+        <div class="col-md-12">
+            <h1>小杰杰的测试网站</h1>
+        </div>
+    </div>
+    <!--按钮-->
+    <div class="row">
+        <div class="col-md-4 col-md-offset-8">
+            <button class="btn btn-primary">新增</button>
+            <button class="btn btn-danger">删除</button>
+        </div>
+    </div>
+    <!--显示表格数据-->
+    <div class="row"></div>
+    <!--显示分页信息-->
+    <div class="row"></div>
+</div>
 
-<table>
-    <tr>
-        <th colspan="6">列表</th>
-    </tr>
-    <tr>
-        <th>flowid</th>
-        <th>type</th>
-        <th>examcard</th>
-        <th>studentname</th>
-        <th>location</th>
-        <th>grade</th>
-    </tr>
-    <tr th:each="stu : ${list}">
-        <td th:text="${stu.flowid}"></td>
-        <td th:text="${stu.type}"></td>
-        <td th:text="${stu.examcard}"></td>
-        <td th:text="${stu.studentname}"></td>
-        <td th:text="${stu.location}"></td>
-        <td th:text="${stu.grade}"></td>
-    </tr>
-</table>
+
+
+
+
+
+
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th colspan="6">列表</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th>flowid</th>-->
+<!--        <th>type</th>-->
+<!--        <th>examcard</th>-->
+<!--        <th>studentname</th>-->
+<!--        <th>location</th>-->
+<!--        <th>grade</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="stu : ${list}">-->
+<!--        <td th:text="${stu.flowid}"></td>-->
+<!--        <td th:text="${stu.type}"></td>-->
+<!--        <td th:text="${stu.examcard}"></td>-->
+<!--        <td th:text="${stu.studentname}"></td>-->
+<!--        <td th:text="${stu.location}"></td>-->
+<!--        <td th:text="${stu.grade}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
 </body>
 </html>
