@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class ExanstudentController {
 
     // 这不是一个分页请求
     @RequestMapping("/list")
+    @ResponseBody
     // 接收一个name为pn的参数，默认值为1，表示第一页
-    public String getStu(Model model, @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+    public PageInfo<Examstudent> getStu(Model model, @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
         // 进行分页，每页5条数据
         PageHelper.startPage(pn, 5);
         List<Examstudent> stus = service.getAll();
@@ -37,6 +39,6 @@ public class ExanstudentController {
         // 封装了详细的分页信息，包括有我们查询出来的数据，传入连续显示的页数
         PageInfo<Examstudent> page = new PageInfo<Examstudent>(stus, 5);
         model.addAttribute("pageInfo", page);
-        return "list";
+        return page;
     }
 }
